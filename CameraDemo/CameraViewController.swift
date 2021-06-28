@@ -19,9 +19,12 @@ class CameraViewController: UIViewController {
     }
     
     
+    @IBAction func capturePhoto(_ sender: Any) {
+        sessionHandler.capturePhoto()
+    }
     
     
-
-
+    
+    
 }
 

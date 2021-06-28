@@ -13,6 +13,9 @@ class SessionHandler {
     let session = AVCaptureSession()
     private var sessionQueue = DispatchQueue(label: "capture_session")
     
+    
+    private let photoOutput = AVCapturePhotoOutput()
+    
     init() {
         sessionQueue.async {
             self.setUpSession()
@@ -28,13 +31,33 @@ class SessionHandler {
             session.addInput(deviceInput)
         }
         
-        let photoOutput = AVCapturePhotoOutput()
         if session.canAddOutput(photoOutput) {
             session.sessionPreset = .photo
             session.addOutput(photoOutput)
         }
         
         session.commitConfiguration()
+        
         session.startRunning()
     }
+    
+    func capturePhoto() {
+        sessionQueue.async {
+            var captureSetting = AVCapturePhotoSettings()
+            
+            if self.photoOutput.availablePhotoCodecTypes.contains(.hevc) {
+                captureSetting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+            }
+            
+            captureSetting.flashMode = .auto
+            
+            let photoProcessor = PhotoCaptureProcessor(with: captureSetting)
+
+            self.photoOutput.capturePhoto(with: captureSetting, delegate: photoProcessor)
+            
+        }
+    }
+    
+    
+    
 }

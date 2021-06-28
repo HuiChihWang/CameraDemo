@@ -26,6 +26,9 @@
                                     <constraint firstAttribute="width" constant="80" id="rIa-CT-IbN"/>
                                 </constraints>
                                 <state key="normal" image="CapturePhoto"/>
+                                <connections>
+                                    <action selector="capturePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Rw-nh-p2c"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
