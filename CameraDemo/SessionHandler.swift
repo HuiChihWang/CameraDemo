@@ -22,6 +22,21 @@ class SessionHandler {
         }
     }
     
+    func capturePhoto() {
+        sessionQueue.async {
+            var captureSetting = AVCapturePhotoSettings()
+            
+            if self.photoOutput.availablePhotoCodecTypes.contains(.hevc) {
+                captureSetting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+            }
+            
+            captureSetting.flashMode = .auto
+            let photoProcessor = PhotoCaptureProcessor(with: captureSetting)
+            self.photoOutput.capturePhoto(with: captureSetting, delegate: photoProcessor)
+            
+        }
+    }
+    
     private func setUpSession() {
         session.beginConfiguration()
         
@@ -37,27 +52,7 @@ class SessionHandler {
         }
         
         session.commitConfiguration()
-        
         session.startRunning()
     }
-    
-    func capturePhoto() {
-        sessionQueue.async {
-            var captureSetting = AVCapturePhotoSettings()
-            
-            if self.photoOutput.availablePhotoCodecTypes.contains(.hevc) {
-                captureSetting = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
-            }
-            
-            captureSetting.flashMode = .auto
-            
-            let photoProcessor = PhotoCaptureProcessor(with: captureSetting)
-
-            self.photoOutput.capturePhoto(with: captureSetting, delegate: photoProcessor)
-            
-        }
-    }
-    
-    
     
 }
