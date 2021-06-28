@@ -17,6 +17,7 @@
 		0CEB4573268991CF0066AED3 /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB4572268991CF0066AED3 /* VideoPreviewView.swift */; };
 		0CEB45752689E3610066AED3 /* SessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB45742689E3610066AED3 /* SessionHandler.swift */; };
 		0CEB45772689EF1A0066AED3 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB45762689EF1A0066AED3 /* PhotoCaptureProcessor.swift */; };
+		0CEB4579268A18F40066AED3 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB4578268A18F40066AED3 /* DisplayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		0CEB4572268991CF0066AED3 /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewView.swift; sourceTree = "<group>"; };
 		0CEB45742689E3610066AED3 /* SessionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHandler.swift; sourceTree = "<group>"; };
 		0CEB45762689EF1A0066AED3 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
+		0CEB4578268A18F40066AED3 /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		0CEB45412689910A0066AED3 /* CameraDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0CEB4578268A18F40066AED3 /* DisplayViewController.swift */,
 				0CEB45422689910A0066AED3 /* AppDelegate.swift */,
 				0CEB45442689910A0066AED3 /* SceneDelegate.swift */,
 				0CEB45462689910A0066AED3 /* CameraViewController.swift */,
@@ -264,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CEB45472689910A0066AED3 /* CameraViewController.swift in Sources */,
+				0CEB4579268A18F40066AED3 /* DisplayViewController.swift in Sources */,
 				0CEB4573268991CF0066AED3 /* VideoPreviewView.swift in Sources */,
 				0CEB45772689EF1A0066AED3 /* PhotoCaptureProcessor.swift in Sources */,
 				0CEB45432689910A0066AED3 /* AppDelegate.swift in Sources */,
