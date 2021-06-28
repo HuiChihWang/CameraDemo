@@ -12,7 +12,6 @@ class PhotoCaptureProcessor: NSObject, AVCapturePhotoCaptureDelegate {
     private static var processes = [Int64: PhotoCaptureProcessor]()
     
     private var procId: Int64
-    private var photoData: Data?
     private var completion: ((Data?) -> Void)?
     
     init(with captureSetting: AVCapturePhotoSettings,
@@ -26,7 +25,7 @@ class PhotoCaptureProcessor: NSObject, AVCapturePhotoCaptureDelegate {
         
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         print("capture photo in processor")
-        photoData = photo.fileDataRepresentation()
+        let photoData = photo.fileDataRepresentation()
         completion?(photoData)
     }
     
