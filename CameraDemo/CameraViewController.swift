@@ -14,6 +14,8 @@ protocol CameraViewControllerDelegate: AnyObject {
 
 class CameraViewController: UIViewController {
     @IBOutlet weak var preview: VideoPreviewView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var photoButton: UIButton!
     
     private let sessionHandler = SessionHandler()
     
@@ -26,6 +28,8 @@ class CameraViewController: UIViewController {
     
     
     @IBAction func capturePhoto(_ sender: Any) {
+        photoButton.isHidden = true
+        spinner.startAnimating()
         sessionHandler.capturePhoto { data in
             if let data = data {
                 let image = UIImage(data: data)

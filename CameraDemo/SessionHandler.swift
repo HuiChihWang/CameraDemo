@@ -21,6 +21,10 @@ class SessionHandler {
         }
     }
     
+    deinit {
+        session.stopRunning()
+    }
+    
     func capturePhoto(completion: @escaping (Data?) -> Void) {
         sessionQueue.async {
             var captureSetting = AVCapturePhotoSettings()
