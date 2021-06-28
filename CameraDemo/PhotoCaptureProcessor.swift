@@ -13,17 +13,21 @@ class PhotoCaptureProcessor: NSObject, AVCapturePhotoCaptureDelegate {
     
     private var procId: Int64
     private var photoData: Data?
+    private var completion: ((Data?) -> Void)?
     
-    init(with captureSetting: AVCapturePhotoSettings) {
-        procId = captureSetting.uniqueID
-        super.init()
+    init(with captureSetting: AVCapturePhotoSettings,
+         completion: ((Data?) -> Void)? = nil) {
+        self.procId = captureSetting.uniqueID
+        self.completion = completion
         
+        super.init()
         PhotoCaptureProcessor.processes[procId] = self
     }
         
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         print("capture photo in processor")
         photoData = photo.fileDataRepresentation()
+        completion?(photoData)
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?) {

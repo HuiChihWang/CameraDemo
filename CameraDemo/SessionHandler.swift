@@ -12,9 +12,8 @@ class SessionHandler {
     
     let session = AVCaptureSession()
     private var sessionQueue = DispatchQueue(label: "capture_session")
-    
-    
     private let photoOutput = AVCapturePhotoOutput()
+    
     
     init() {
         sessionQueue.async {
@@ -22,7 +21,7 @@ class SessionHandler {
         }
     }
     
-    func capturePhoto() {
+    func capturePhoto(completion: @escaping (Data?) -> Void) {
         sessionQueue.async {
             var captureSetting = AVCapturePhotoSettings()
             
@@ -31,7 +30,8 @@ class SessionHandler {
             }
             
             captureSetting.flashMode = .auto
-            let photoProcessor = PhotoCaptureProcessor(with: captureSetting)
+            let photoProcessor = PhotoCaptureProcessor(with: captureSetting, completion: completion)
+            
             self.photoOutput.capturePhoto(with: captureSetting, delegate: photoProcessor)
             
         }

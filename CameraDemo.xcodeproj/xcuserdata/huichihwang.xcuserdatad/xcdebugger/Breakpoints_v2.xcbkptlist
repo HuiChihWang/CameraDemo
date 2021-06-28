@@ -14,8 +14,8 @@
             filePath = "CameraDemo/PhotoCaptureProcessor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "photoOutput(_:didFinishProcessingPhoto:error:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -23,16 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "485CFA32-47AB-43B0-B98A-A2E767C44B33"
-            shouldBeEnabled = "No"
+            uuid = "5575A2F2-ADF3-40C1-8C68-CF49BB35A9EA"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DisplayViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "didCapturePhoto(_:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
