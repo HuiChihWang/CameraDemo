@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 protocol CameraControlViewModelDelegate: AnyObject {
+    func willCapturePhoto()
     func didCapturePhoto(image: UIImage?)
 }
 
@@ -19,12 +20,16 @@ class CameraControlViewModel {
     weak var delegate: CameraControlViewModelDelegate?
     
     func capturePhoto() {
-        session.capturePhoto { photoData in
-            if let data = photoData {
-                let image = UIImage(data: data)
-                print("get photo data")
-                self.delegate?.didCapturePhoto(image: image)
+        session.capturePhoto(
+            beforeCapture: {
+                self.delegate?.willCapturePhoto()
+            }, completion: { photoData in
+                if let data = photoData {
+                    print("[CameraVM]: Get photo data")
+                    let image = UIImage(data: data)
+                    self.delegate?.didCapturePhoto(image: image)
+                }
             }
-        }
+        )
     }
 }

@@ -13,24 +13,32 @@ class PhotoCaptureProcessor: NSObject, AVCapturePhotoCaptureDelegate {
     
     private var procId: Int64
     private var completion: ((Data?) -> Void)?
+    private var beforeCapture: (() -> Void)?
     
     init(with captureSetting: AVCapturePhotoSettings,
+         beforeCapture: (() -> Void)? = nil,
          completion: ((Data?) -> Void)? = nil) {
         self.procId = captureSetting.uniqueID
         self.completion = completion
+        self.beforeCapture = beforeCapture
         
         super.init()
         PhotoCaptureProcessor.processes[procId] = self
     }
         
+    func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        print("[Capture]: Start capture")
+        beforeCapture?()
+    }
+    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        print("capture photo in processor")
+        print("[Capture]: Capture photo in processor")
         let photoData = photo.fileDataRepresentation()
         completion?(photoData)
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?) {
-        print("finish proc with id: \(resolvedSettings.uniqueID)")
+        print("[Capture]: Finish proc with id: \(resolvedSettings.uniqueID)")
         PhotoCaptureProcessor.processes[resolvedSettings.uniqueID] = nil
     }
 }

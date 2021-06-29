@@ -28,17 +28,28 @@ class CameraViewController: UIViewController {
     
     
     @IBAction func capturePhoto(_ sender: Any) {
-        photoButton.isHidden = true
-        spinner.startAnimating()
         cameraVM.capturePhoto()
     }
 }
 
 extension CameraViewController: CameraControlViewModelDelegate {
+    func willCapturePhoto() {
+        DispatchQueue.main.async {
+            self.photoButton.isHidden = true
+            self.spinner.startAnimating()
+            
+            self.preview.videoPreviewLayer.opacity = 0
+            UIView.animate(withDuration: 0.2) {
+                self.preview.videoPreviewLayer.opacity = 1
+            }
+        }
+    }
+    
     func didCapturePhoto(image: UIImage?) {
         delegate?.didCapturePhoto(self, image: image)
-        
         DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.photoButton.isHidden = false
             self.navigationController?.popViewController(animated: true)
         }
     }

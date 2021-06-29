@@ -25,7 +25,9 @@ class SessionHandler {
         session.stopRunning()
     }
     
-    func capturePhoto(completion: @escaping (Data?) -> Void) {
+    func capturePhoto(
+        beforeCapture: @escaping () -> Void, 
+        completion: @escaping (Data?) -> Void) {
         sessionQueue.async {
             var captureSetting = AVCapturePhotoSettings()
             
@@ -34,7 +36,10 @@ class SessionHandler {
             }
             
             captureSetting.flashMode = .auto
-            let photoProcessor = PhotoCaptureProcessor(with: captureSetting, completion: completion)
+            let photoProcessor = PhotoCaptureProcessor(
+                with: captureSetting,
+                beforeCapture: beforeCapture,
+                completion: completion)
             
             self.photoOutput.capturePhoto(with: captureSetting, delegate: photoProcessor)
             

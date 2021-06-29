@@ -137,7 +137,7 @@
         <image name="CapturePhoto" width="150" height="150"/>
         <image name="TakePhoto" width="256" height="256"/>
         <namedColor name="AccentColor">
-            <color red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.98799997568130493" blue="0.47299998998641968" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
