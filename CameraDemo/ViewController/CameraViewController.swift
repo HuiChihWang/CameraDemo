@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 protocol CameraViewControllerDelegate: AnyObject {
     func didCapturePhoto(_ cameraController: CameraViewController, image: UIImage?)
@@ -17,25 +16,29 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var photoButton: UIButton!
     
-    private let sessionHandler = SessionHandler()
+    private let cameraVM = CameraControlViewModel()
     
     weak var delegate: CameraViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        preview.videoPreviewLayer.session = sessionHandler.session
+        cameraVM.delegate = self
+        preview.videoPreviewLayer.session = cameraVM.session.session
     }
     
     
     @IBAction func capturePhoto(_ sender: Any) {
         photoButton.isHidden = true
         spinner.startAnimating()
-        sessionHandler.capturePhoto { data in
-            if let data = data {
-                let image = UIImage(data: data)
-                self.delegate?.didCapturePhoto(self, image: image)
-                print("get photo data")
-            }
+        cameraVM.capturePhoto()
+    }
+}
+
+extension CameraViewController: CameraControlViewModelDelegate {
+    func didCapturePhoto(image: UIImage?) {
+        delegate?.didCapturePhoto(self, image: image)
+        
+        DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
         }
     }

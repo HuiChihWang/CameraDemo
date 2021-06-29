@@ -37,20 +37,18 @@ class DisplayViewControlViewModel {
     }
     
     func checkAuthorization() {
-    switch AVCaptureDevice.authorizationStatus(for: .video) {
-    case .notDetermined:
-        AVCaptureDevice.requestAccess(for: .video) { isAllowed in
-            self.warningStatus = isAllowed ? .none : .notAuth
-            if self.warningStatus == .none, !self.isImageTaken {
-                self.warningStatus = .noImage
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { isAllowed in
+                self.warningStatus = isAllowed ? .none : .notAuth
+                if self.warningStatus == .none, !self.isImageTaken {
+                    self.warningStatus = .noImage
+                }
+            }
+        case .authorized:
+            self.warningStatus = isImageTaken ? .none : .noImage
+        default:
+            self.warningStatus = .notAuth
         }
     }
-    case .authorized:
-        self.warningStatus = isImageTaken ? .none : .noImage
-    default:
-        self.warningStatus = .notAuth
-    }
-}
-
-
 }
